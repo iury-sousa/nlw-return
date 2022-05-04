@@ -1,0 +1,12 @@
+**/tests/fixtures/**/*
+!packages/scope-manager/tests/fixtures/**/*
+**/tests/fixture-project/**/*
+**/dist
+**/build
+**/coverage
+**/shared-fixtures
+**/.vscode
+**/.nyc_output
+**/.vs
+.eslintrc.js
+**/*.config.js

@@ -1,0 +1,20 @@
+{
+  "packageManager": "yarn",
+  "semi": true,
+  "singleQuote": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "printWidth": 120,
+  "jsxSingleQuote": true,
+  "bracketSameLine": true,
+  "eslintIntegration": true,
+  "tslintIntegration": true,
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
+}
