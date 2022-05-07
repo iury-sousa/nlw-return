@@ -1,21 +1,32 @@
-import React, { useRef } from 'react';
-import { ChatTeardropDots } from 'phosphor-react-native';
-import { Text, TouchableOpacity } from 'react-native';
-import { theme } from '../../theme';
-
-import { styles } from './styles';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { ChatTeardropDots } from 'phosphor-react-native';
+import React, { useRef, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
-import { Options } from '../Options';
+import { theme } from '../../theme';
 import { feedbackTypes } from '../../utils/feedbackTypes';
 import { Form } from '../Form';
+import { Options } from '../Options';
+import { Success } from '../Success';
+import { styles } from './styles';
 
 export type FeedbackType = keyof typeof feedbackTypes;
 function widgetComponent() {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   function handleOpen() {
     bottomSheetRef.current?.expand();
+  }
+
+  function handleRestartFeedback() {
+    setFeedbackType(null);
+    setFeedbackSent(false);
+  }
+
+  function handleFeedbackSent() {
+    setFeedbackSent(true);
   }
 
   return (
@@ -28,8 +39,21 @@ function widgetComponent() {
         snapPoints={[1, 280]}
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}>
-        {/* <Options /> */}
-        <Form feedbackType='BUG' />
+        {feedbackSent ? (
+          <Success onSendAnotherFeedback={handleRestartFeedback} />
+        ) : (
+          <>
+            {feedbackType ? (
+              <Form
+                feedbackType={feedbackType}
+                onFeedbackCanceled={handleRestartFeedback}
+                onFeedbackSent={handleFeedbackSent}
+              />
+            ) : (
+              <Options onFeedbackTypeChanged={setFeedbackType} />
+            )}
+          </>
+        )}
       </BottomSheet>
     </>
   );

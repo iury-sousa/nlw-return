@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     bottom: getBottomSpace() + 16,
   },
   indicator: {
-    backgroundColor: theme.colors.text_primary,
+    backgroundColor: theme.colors.text_secondary,
     width: 56,
   },
   modal: {
