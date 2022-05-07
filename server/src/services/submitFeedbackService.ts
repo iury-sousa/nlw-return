@@ -37,7 +37,7 @@ export class SubmitFeedbackService {
         `<div style="font-family: sans-serif; font-size: 16px: color: #111">`,
         `<p>Tipo de feedback: ${type}</p>`,
         `<p>Comentário: ${comment}</p>`,
-        `<img src="${screenshot}" alt="icone de ${type}">`,
+        screenshot ? `<img src="${screenshot}" alt="icone de ${type}">` : '',
         `</div>`,
       ].join('\n'),
     });
